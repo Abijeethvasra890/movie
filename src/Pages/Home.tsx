@@ -1,10 +1,10 @@
-import Carousel from "../Components/Carousel"
+import Carousel from "../Components/Carousel/Carousel"
 import Hero from "../Components/Hero"
 import Navbar from "../Components/Navbar"
 
 const Home = () => {
   return (
-    <div className="flex bg-black overflow-y-auto">
+    <div className="flex bg-black overflow-hidden">
         <div className="fixed left-0 top-0 h-full">
           <Navbar />
         </div>

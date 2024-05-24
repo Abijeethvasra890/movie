@@ -13,7 +13,7 @@ type Propstype = {
 
 export const fetchData = async ({mainTerm, searchTerm}:Propstype): Promise<any> => {
     try {
-        console.log(`https://api.themoviedb.org/3/${mainTerm}/${searchTerm}`);
+        //console.log(`https://api.themoviedb.org/3/${mainTerm}/${searchTerm}`);
         const url = `https://api.themoviedb.org/3/${mainTerm}/${searchTerm}`
         const response = await fetch(url, options);
         if (!response.ok) {
