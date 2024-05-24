@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faFilm, faTv, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faFilm, faTv, faSearch, faQuestionCircle, IconDefinition  } from '@fortawesome/free-solid-svg-icons';
 
 
 type PropsType = {
@@ -9,7 +9,7 @@ type PropsType = {
 }
 
 const NavBarLinks = ({url,name}:PropsType) => {
-    const getIcon = (url) => {
+    const getIcon = (url:string):IconDefinition => {
         switch (url) {
           case '/':
             return faHome;
@@ -20,7 +20,7 @@ const NavBarLinks = ({url,name}:PropsType) => {
           case '/search':
             return faSearch;
           default:
-            return null;
+            return faQuestionCircle;
         }
       };
   return (
@@ -31,7 +31,7 @@ const NavBarLinks = ({url,name}:PropsType) => {
                 className={location.pathname === url ? 'text-red-500' : 'text-white'}
             >
                 <div className="flex flex-col items-center justify-center"> 
-                    {getIcon(url) && <FontAwesomeIcon icon={getIcon(url)} className="mr-2" />}
+                    <FontAwesomeIcon icon={getIcon(url)} className="mr-2" />
                     {name}
                 </div>
             </Link>
