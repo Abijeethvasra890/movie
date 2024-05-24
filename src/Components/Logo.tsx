@@ -1,7 +1,8 @@
+import logo from '../assets/av_logo.png';
 
 const Logo = () => {
   return (
-    <img src="src\assets\av_logo.png" className="w-16 h-12 mb-10"/>
+    <img src={logo} alt="av_logo" className="w-16 h-12 mb-10"/>
   )
 }
 
