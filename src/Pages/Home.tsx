@@ -4,11 +4,14 @@ import Navbar from "../Components/Navbar"
 
 const Home = () => {
   return (
-    <div className="flex">
-        <Navbar />
-        <div>
+    <div className="flex bg-black overflow-y-auto">
+        <div className="fixed left-0 top-0 h-full">
+          <Navbar />
+        </div>
+        <div className="ml-28">
             <Hero />
-            <Carousel />
+            <Carousel main="movie" search="top_rated"/>
+            <Carousel main ="tv" search="top_rated"/>
         </div>
     </div>
   )

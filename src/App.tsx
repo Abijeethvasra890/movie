@@ -4,6 +4,7 @@ import PDP from "./Pages/PDP"
 import './index.css';
 import ShowsPLP from "./Pages/ShowsPLP";
 import MoviesPLP from "./Pages/MoviesPLP";
+import Search from "./Components/Search";
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
         <Route path="/moviesplp" element={<MoviesPLP />} />
         <Route path="/showsplp" element={<ShowsPLP />} />
         <Route path="/pdp:id" element={<PDP />} />
-        <Route path="/search" element = "" />
+        <Route path="/search" element = {<Search />} />
       </Routes>
     </>
   )
