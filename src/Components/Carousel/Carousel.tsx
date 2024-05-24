@@ -31,7 +31,7 @@ const Carousel = ({main, search}:PropsType) => {
       <div className="flex gap-2 bg-stone-800 p-3 overflow-x-scroll hide-scrollbar" >
         {data.length > 0 ? (
           data.map((movie) => (
-            <CarouselCard key={movie.id} movie={movie} /> 
+            <CarouselCard  movie={movie} /> 
           ))
         ) : (
           'Loading...'
