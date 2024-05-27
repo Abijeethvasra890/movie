@@ -27,7 +27,7 @@ const DetailCard = ({ mainTerm, searchTerm, id }: PropsType) => {
     const getMovie = async () => {
       try {
         const data = await fetchData({ mainTerm, searchTerm: id });
-        console.log(data);
+       // console.log(data);
         setMovie(data);
       } catch (error) {
         console.error('Failed to fetch movie details:', error);

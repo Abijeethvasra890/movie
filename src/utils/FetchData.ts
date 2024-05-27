@@ -20,10 +20,12 @@ export const fetchData = async ({mainTerm, searchTerm, thirdTerm}:Propstype): Pr
         : `https://api.themoviedb.org/3/${mainTerm}/${searchTerm}`;
 
         const response = await fetch(url, options);
+        
         if (!response.ok) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
         const data = await response.json();
+        console.log(data);
         return data;
     } catch (err) {
         console.error('Failed to fetch data:', err);
