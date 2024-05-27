@@ -9,12 +9,13 @@ const ShowsPLP = () => {
       <div className="fixed left-0 top-0 h-full">
           <Navbar />
         </div>
-        <div className="ml-28">
-            <Hero />
+        <div className="md:ml-28">
+            <Hero main="tv" search="trending" third="day"/>
             <Carousel main="tv" search="popular"/>
             <Carousel main="tv" search="top_rated"/>
             <Carousel main="tv" search="on_the_air"/>
             <Carousel main="tv" search="airing_today"/>
+            <div className="mb-28"></div>
         </div>
     </div>
   )

@@ -9,12 +9,16 @@ const options = {
 type Propstype = {
     searchTerm:string;
     mainTerm: string;
+    thirdTerm?: string;
 }
 
-export const fetchData = async ({mainTerm, searchTerm}:Propstype): Promise<any> => {
+export const fetchData = async ({mainTerm, searchTerm, thirdTerm}:Propstype): Promise<any> => {
     try {
-        //console.log(`https://api.themoviedb.org/3/${mainTerm}/${searchTerm}`);
-        const url = `https://api.themoviedb.org/3/${mainTerm}/${searchTerm}`
+        console.log(`https://api.themoviedb.org/3/${mainTerm}/${searchTerm}/${thirdTerm}`);
+        const url = thirdTerm !=null
+        ? `https://api.themoviedb.org/3/${searchTerm}/${mainTerm}/${thirdTerm}`
+        : `https://api.themoviedb.org/3/${mainTerm}/${searchTerm}`;
+
         const response = await fetch(url, options);
         if (!response.ok) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
@@ -23,6 +27,6 @@ export const fetchData = async ({mainTerm, searchTerm}:Propstype): Promise<any> 
         return data;
     } catch (err) {
         console.error('Failed to fetch data:', err);
-        throw err; // Re-throw the error to be handled by the caller
+        throw err;
     }
 };

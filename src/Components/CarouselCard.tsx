@@ -1,24 +1,43 @@
+import React from 'react';
+
 type Movie = {
-    id: number;
-    title: string;
-    poster_path:string;
-    name:string
-    // Add other properties as needed
-  };
+  id: number;
+  title?: string;
+  poster_path?: string;
+  name?: string;
+  cast_id?: number;
+  profile_path?: string;
+  character?: string;
+};
 
 type PropsType = {
-    movie: Movie;
-}
-
+  movie: Movie;
+};
 
 const CarouselCard = ({ movie }: PropsType) => {
-    const imageBaseUrl = "https://image.tmdb.org/t/p/original"; 
-    return (
-      <div className="flex flex-col">
-        <img className="min-w-44 " src={`${imageBaseUrl}${movie.poster_path}`} alt={`${movie.title} poster`} />
-        <div className="text-white">{movie.title ? movie.title : movie.name}</div>
-      </div>
-    );
-  };
+  if (!movie) {
+    return null; 
+  }
 
-export default CarouselCard
+  const imageBaseUrl = "https://image.tmdb.org/t/p/original";
+
+  return (
+    <div className="flex flex-col">
+      <img
+        className="min-w-44"
+        src={`${imageBaseUrl}${movie.cast_id ? movie.profile_path : movie.poster_path}`}
+        alt={movie.title || movie.name || "Movie Poster"}
+      />
+      <div className="text-white">
+        {movie.title || movie.name}
+      </div>
+      {movie.character && (
+        <div className="text-white">
+          {movie.character}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default CarouselCard;
