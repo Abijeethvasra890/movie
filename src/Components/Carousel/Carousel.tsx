@@ -30,7 +30,7 @@ const Carousel = ({main, search, third, pdppage}:PropsType) => {
         //console.log(data.cast);
         if(data.cast){
           setData(data.cast.slice(1,10));
-          console.log("set data.cast");
+         // console.log("set data.cast");
           
         }
         else setData(data.results);
@@ -52,13 +52,13 @@ const Carousel = ({main, search, third, pdppage}:PropsType) => {
   let movieCheck = false;
   if(main == "movie") movieCheck = true;
   
-  console.log(data);
+ // console.log(data);
   return (
     <div className="m-3 overflow-hidden md:w-[1150px]">
       <p className="text-white">
         {pdppage ? "Cast" : `${capitalizeFirstLetter(main)} ${search}`}
       </p>
-      <div className="flex gap-2 bg-stone-800 p-3 overflow-x-scroll hide-scrollbar" >
+      <div className="flex gap-2 bg-stone-800 p-3 overflow-x-scroll hide-scrollbar rounded-xl" >
         {data.length > 0 && movieCheck ? (
           data.map((movie) => (
            <Link key={movie.id} to={`movie/pdp/${movie.id}`}>
