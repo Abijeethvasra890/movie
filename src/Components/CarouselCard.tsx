@@ -8,16 +8,19 @@ type Movie = {
   cast_id?: number;
   profile_path?: string;
   character?: string;
+  known_for_department?:string;
 };
 
 type PropsType = {
   movie: Movie;
+
 };
 
 const CarouselCard = ({ movie }: PropsType) => {
   if (!movie) {
     return null; 
   }
+  console.log(movie.profile_path);
 
   const imageBaseUrl = "https://image.tmdb.org/t/p/original";
 
@@ -26,7 +29,7 @@ const CarouselCard = ({ movie }: PropsType) => {
       <CardBody>
         <CardItem>
         <img
-        src={`${imageBaseUrl}${movie.cast_id ? movie.profile_path : movie.poster_path}`}
+        src={`${imageBaseUrl}${movie.known_for_department ? movie.profile_path : movie.poster_path}`}
         alt={movie.title || movie.name || "Movie Poster"}
       />
       <div className="text-white">

@@ -23,7 +23,7 @@ function App() {
         <Route path="/movie/pdp/:id" element={<MoviesPDP />} />
         <Route path="moviesPLP/movie/pdp/:id" element={<MoviesPDP />} />
         <Route path="/show/pdp/:id" element={<ShowsPDP />} />
-        <Route path="showsPLP/movie/pdp/:id" element={<ShowsPDP />} />
+        <Route path="showsPLP/show/pdp/:id" element={<ShowsPDP />} />
         <Route path="/search" element = {<Search />} />
       </Routes>
     </>

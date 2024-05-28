@@ -25,7 +25,7 @@ export const fetchData = async ({mainTerm, searchTerm, thirdTerm}:Propstype): Pr
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
         const data = await response.json();
-        console.log(data);
+        console.log(data.cast);
         return data;
     } catch (err) {
         console.error('Failed to fetch data:', err);

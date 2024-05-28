@@ -19,7 +19,7 @@ const ShowsPDP = () => {
         <div className="md:ml-28">
           <Hero main="tv" search={id || ''} pdp={true} />
           {/*<DetailCard mainTerm='tv' searchTerm={id || ''} id={id || ''}/>*/}
-          <Carousel main={id || ''} search="tv" third='credits'/>
+          <Carousel main={id || ''} search="tv" third='aggregate_credits' pdppage={true}/>
           <div className="mb-28"></div>
       </div>
     </div>

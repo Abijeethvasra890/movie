@@ -14,6 +14,7 @@ type Movie = {
   backdrop_path: string;
   title: string;
   overview: string;
+  original_name?:string;
 };
 
 
@@ -93,10 +94,10 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
               <img 
                 className='md:absolute md:top-0 md:right-0 md:h-[100%] md:w-[72%]'
                 src={`${imageBaseUrl}${data[0]?.backdrop_path}`} 
-                alt={data[0]?.title} 
+                alt={data[0]?.title || data[0]?.original_name} 
               />
               <div className="absolute top-0 z-10 md:flex md:flex-col md:justify-center md:bottom-0 md:left-0 md:p-4 md:w-4/12 rounded-[80px] bg-black bg-opacity-80">
-                <h1 className="text-2xl text-white">{data[0]?.title}</h1>
+                <h1 className="text-2xl text-white">{data[0]?.title || data[0]?.original_name}</h1>
                 <p className="text-white">{data[0]?.overview}</p>
               </div>
             </div>

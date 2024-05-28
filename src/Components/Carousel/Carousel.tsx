@@ -9,6 +9,7 @@ type PropsType = {
   search: string;
   main:string;
   third?:string;
+  pdppage?:boolean;
 }
 
 type Movie = {
@@ -20,15 +21,21 @@ type Movie = {
   name:string
 };
 
-const Carousel = ({main, search, third}:PropsType) => {
+const Carousel = ({main, search, third, pdppage}:PropsType) => {
   const [data, setData] = useState<Movie[]>([]);
   useEffect(() => {
     const getData = async () => {
       try {
         const data = await fetchData({ mainTerm: main, searchTerm: search, thirdTerm: third });
         //console.log(data.cast);
-        if(data?.cast)setData(data.cast);
+        if(data.cast){
+          setData(data.cast.slice(1,10));
+          console.log("set data.cast");
+          
+        }
         else setData(data.results);
+       
+        //console.log(data.cast.slice(1,10));
       } catch (error) {
         console.error('Failed to fetch data:', error);
       }
@@ -45,10 +52,11 @@ const Carousel = ({main, search, third}:PropsType) => {
   let movieCheck = false;
   if(main == "movie") movieCheck = true;
   
+  console.log(data);
   return (
     <div className="m-3 overflow-hidden md:w-[1150px]">
       <p className="text-white">
-        {`${capitalizeFirstLetter(main)} ${search}`}
+        {pdppage ? "Cast" : `${capitalizeFirstLetter(main)} ${search}`}
       </p>
       <div className="flex gap-2 bg-stone-800 p-3 overflow-x-scroll hide-scrollbar" >
         {data.length > 0 && movieCheck ? (
@@ -64,7 +72,7 @@ const Carousel = ({main, search, third}:PropsType) => {
           data.map((movie) => (
             <Link key={movie.id} to={`show/pdp/${movie.id}`}>
               <CardContainer key={movie.id}>
-                <CarouselCard movie={movie} /> 
+                <CarouselCard movie={movie}/> 
               </CardContainer>
             </Link>
           ))
