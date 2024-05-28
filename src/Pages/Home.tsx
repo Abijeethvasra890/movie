@@ -1,4 +1,5 @@
 import Carousel from "../Components/Carousel/Carousel"
+import Footer from "../Components/Footer"
 import Hero from "../Components/Hero"
 import Navbar from "../Components/Navbar"
 
@@ -12,6 +13,7 @@ const Home = () => {
             <Hero main="movie" search="trending" third="day"/>
             <Carousel main="movie" search="top_rated"/>
             <Carousel main ="tv" search="top_rated"/>
+            <Footer />
             <div className="mb-28"></div>
         </div>
     </div>
