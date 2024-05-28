@@ -6,7 +6,7 @@ import ShowsPLP from "./Pages/ShowsPLP";
 import MoviesPLP from "./Pages/MoviesPLP";
 import Search from "./Components/Search";
 import { Analytics } from '@vercel/analytics/react';
- 
+import { SpeedInsights } from '@vercel/speed-insights/remix';
 
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
   return (
     <>
     <Analytics />
+    <SpeedInsights />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/moviesplp" element={<MoviesPLP />} />
