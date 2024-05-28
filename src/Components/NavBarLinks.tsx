@@ -25,7 +25,7 @@ const NavBarLinks = ({url,name}:PropsType) => {
       };
   return (
     <div>
-        <div className="mb-10">
+        <div className="md:mb-10">
             <Link 
                 to={url}  
                 className={location.pathname === url ? 'text-red-500' : 'text-white'}

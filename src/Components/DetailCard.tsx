@@ -47,7 +47,7 @@ const DetailCard = ({ mainTerm, searchTerm, id }: PropsType) => {
         src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} 
         alt={movie.title} 
       />
-      <div className='text-white m-3 w-[875px] bg-neutral-800 rounded-xl h-76 flex flex-col justify-center'>
+      <div className='text-white m-3 w-[890px] bg-neutral-800 rounded-xl h-76 flex flex-col justify-center'>
         <div className='p-2'>
           <h1 className="text-2xl mb-4">Story Line</h1>
           <p className="mb-4">{movie.overview}</p>
@@ -63,10 +63,10 @@ const DetailCard = ({ mainTerm, searchTerm, id }: PropsType) => {
             <p>Genre: {movie.genres.map((genre, index) => (
               <span key={genre.id}>
                 {genre.name}
-                {index < movie.genres.length - 1 ? ', ' : ''}
+                {index < movie?.genres.length - 1 ? ', ' : ''}
               </span>
             ))}</p>
-           <p>Language: {movie.spoken_languages.map((language, index) => (
+           <p>Language: {movie?.spoken_languages.map((language, index) => (
             <span key={index}>
                 {language.english_name}
                 {index < movie.spoken_languages.length - 1 ? ', ' : ''}

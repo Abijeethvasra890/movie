@@ -1,4 +1,4 @@
-
+import { CardBody, CardItem } from "./ui/3dcard";
 
 type Movie = {
   id: number;
@@ -23,8 +23,9 @@ const CarouselCard = ({ movie }: PropsType) => {
 
   return (
     <div className="flex flex-col">
-      <img
-        className="min-w-44"
+      <CardBody>
+        <CardItem>
+        <img
         src={`${imageBaseUrl}${movie.cast_id ? movie.profile_path : movie.poster_path}`}
         alt={movie.title || movie.name || "Movie Poster"}
       />
@@ -36,6 +37,9 @@ const CarouselCard = ({ movie }: PropsType) => {
           {movie.character}
         </div>
       )}
+        </CardItem>
+      </CardBody>
+      
     </div>
   );
 };

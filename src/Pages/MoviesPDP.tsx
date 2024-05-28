@@ -8,7 +8,7 @@ type Params = {
   id: string;
 };
 
-const PDP = () => {
+const MoviesPDP = () => {
   const { id } = useParams<Params>();
 
   return (
@@ -27,4 +27,4 @@ const PDP = () => {
   );
 };
 
-export default PDP;
+export default MoviesPDP;

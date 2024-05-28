@@ -3,6 +3,7 @@ import { fetchData } from "../../utils/FetchData"
 import CarouselCard from "../CarouselCard";
 import './Carousel.css';
 import { Link } from "react-router-dom";
+import { CardContainer } from "../ui/3dcard";
 
 type PropsType = {
   search: string;
@@ -36,20 +37,40 @@ const Carousel = ({main, search, third}:PropsType) => {
     getData();
   }, [search]);
 
+  const capitalizeFirstLetter = (text:string) => {
+    if (!text) return '';
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  };
 
+  let movieCheck = false;
+  if(main == "movie") movieCheck = true;
+  
   return (
-    <div className="m-3 overflow-hidden md:w-[1280px]">
-      <p className="text-white">{`${main} ${search}`}</p>
+    <div className="m-3 overflow-hidden md:w-[1150px]">
+      <p className="text-white">
+        {`${capitalizeFirstLetter(main)} ${search}`}
+      </p>
       <div className="flex gap-2 bg-stone-800 p-3 overflow-x-scroll hide-scrollbar" >
-        {data.length > 0 ? (
+        {data.length > 0 && movieCheck ? (
           data.map((movie) => (
-            <Link key={movie.id} to={`/pdp/${movie.id}`}>
-              <CarouselCard movie={movie} /> 
+           <Link key={movie.id} to={`movie/pdp/${movie.id}`}>
+              <CardContainer key={movie.id}>
+                <CarouselCard movie={movie} /> 
+              </CardContainer>
             </Link>
           ))
         ) : (
-          'Loading...'
+      
+          data.map((movie) => (
+            <Link key={movie.id} to={`show/pdp/${movie.id}`}>
+              <CardContainer key={movie.id}>
+                <CarouselCard movie={movie} /> 
+              </CardContainer>
+            </Link>
+          ))
+      
         )}
+        
       </div>
     </div>
   )
