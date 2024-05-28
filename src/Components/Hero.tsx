@@ -60,7 +60,7 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
   const imageBaseUrl = "https://image.tmdb.org/t/p/original"; 
 
   return (
-    <div className="flex max-w-[1220px] h-[375px] m-auto p-4 bg-black ml-3 relative">
+    <div className="flex max-w-[1280px] h-[375px] m-auto p-4 bg-black ml-3 relative">
       {loading ? (
         <p>Loading...</p>
       ) : (

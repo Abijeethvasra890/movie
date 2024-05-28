@@ -5,7 +5,7 @@ import './index.css';
 import ShowsPLP from "./Pages/ShowsPLP";
 import MoviesPLP from "./Pages/MoviesPLP";
 import Search from "./Components/Search";
-
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   

@@ -38,7 +38,7 @@ const Carousel = ({main, search, third}:PropsType) => {
 
 
   return (
-    <div className="m-3 overflow-hidden md:w-4/12">
+    <div className="m-3 overflow-hidden md:w-[1280px]">
       <p className="text-white">{`${main} ${search}`}</p>
       <div className="flex gap-2 bg-stone-800 p-3 overflow-x-scroll hide-scrollbar" >
         {data.length > 0 ? (
