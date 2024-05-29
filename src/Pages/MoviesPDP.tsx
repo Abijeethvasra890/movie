@@ -3,6 +3,7 @@ import Navbar from '../Components/Navbar';
 import Carousel from '../Components/Carousel/Carousel';
 import DetailCard from '../Components/DetailCard';
 import Hero from '../Components/Hero';
+import Footer from '../Components/Footer';
 
 type Params = {
   id: string;
@@ -20,6 +21,7 @@ const MoviesPDP = () => {
           <Hero main="movie" search={id || ''} pdp={true} />
           <DetailCard mainTerm='movie' searchTerm={id || ''} id={id || ''}/>
           <Carousel main={id || ''} search="movie" third='credits' pdppage={true}/>
+          <Footer />
           <div className="mb-28"></div>
       </div>
     </div>

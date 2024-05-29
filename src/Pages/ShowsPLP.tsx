@@ -1,12 +1,13 @@
 import Carousel from "../Components/Carousel/Carousel"
+import Footer from "../Components/Footer"
 import Hero from "../Components/Hero"
 import Navbar from "../Components/Navbar"
 
 
 const ShowsPLP = () => {
   return (
-    <div className="flex  bg-black overflow-hidden">
-      <div className="fixed left-0 top-0 h-full">
+    <div className="flex flex-col-reverse md:flex md:flex-row bg-black overflow-hidden">
+      <div>
           <Navbar />
         </div>
         <div className="md:ml-28">
@@ -15,6 +16,7 @@ const ShowsPLP = () => {
             <Carousel main="tv" search="top_rated"/>
             <Carousel main="tv" search="on_the_air"/>
             <Carousel main="tv" search="airing_today"/>
+            <Footer />
             <div className="mb-28"></div>
         </div>
     </div>

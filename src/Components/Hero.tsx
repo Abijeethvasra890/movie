@@ -62,7 +62,7 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
   const imageBaseUrl = "https://image.tmdb.org/t/p/original"; 
 
   return (
-    <div className="flex max-w-[1150px] md:h-[375px] m-auto p-4 bg-black ml-3 relative">
+    <div className="flex max-w-[1150px] md:h-[375px] m-auto p-4 ml-3 relative">
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -97,7 +97,7 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
                 src={`${imageBaseUrl}${data[0]?.backdrop_path}`} 
                 alt={data[0]?.title || data[0]?.original_name} 
               />
-              <div className="absolute top-0 z-10 md:flex md:flex-col md:justify-center md:bottom-0 md:left-0 md:p-4 md:w-4/12 rounded-[80px] bg-black bg-opacity-80">
+              <div className="md:absolute md:top-0 md:z-10 md:flex md:flex-col md:justify-center md:bottom-0 md:left-10 md:p-4 md:w-4/12 rounded-[80px] bg-black bg-opacity-80">
                 <h1 className="text-2xl text-white">{data[0]?.title || data[0]?.original_name}</h1>
                 <p className="text-white">{data[0]?.overview}</p>
               </div>
