@@ -32,3 +32,14 @@ export const fetchData = async ({mainTerm, searchTerm, thirdTerm}:Propstype): Pr
         throw err;
     }
 };
+
+export const searchMovies = async (query:string) => {
+  const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}`;
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  const data = await response.json();
+  return data;
+};
+

@@ -59,24 +59,34 @@ const Carousel = ({main, search, third, pdppage}:PropsType) => {
         {pdppage ? "Cast" : `${capitalizeFirstLetter(main)} ${search}`}
       </p>
       <div className="flex gap-2 bg-stone-800 p-3 overflow-x-scroll hide-scrollbar rounded-xl" >
-        {data.length > 0 && movieCheck ? (
-          data.map((movie) => (
-           <Link key={movie.id} to={`movie/pdp/${movie.id}`}>
-              <CardContainer key={movie.id}>
-                <CarouselCard movie={movie} /> 
+        {data.length > 1 && movieCheck ? (
+         data.map((movie) => (
+          pdppage ? (
+            <CardContainer key={movie.id}>
+              <CarouselCard movie={movie} />
+            </CardContainer>
+          ) : (
+            <Link key={movie.id} to={`movie/pdp/${movie.id}`}>
+              <CardContainer>
+                <CarouselCard movie={movie} />
               </CardContainer>
             </Link>
-          ))
+          )
+        ))
         ) : (
-      
           data.map((movie) => (
-            <Link key={movie.id} to={`show/pdp/${movie.id}`}>
+            pdppage ? (
               <CardContainer key={movie.id}>
-                <CarouselCard movie={movie}/> 
+                <CarouselCard movie={movie} />
               </CardContainer>
-            </Link>
+            ) : (
+              <Link key={movie.id} to={`show/pdp/${movie.id}`}>
+                <CardContainer>
+                  <CarouselCard movie={movie} />
+                </CardContainer>
+              </Link>
+            )
           ))
-      
         )}
         
       </div>

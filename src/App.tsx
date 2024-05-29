@@ -3,11 +3,11 @@ import Home from "./Pages/Home"
 import './index.css';
 import ShowsPLP from "./Pages/ShowsPLP";
 import MoviesPLP from "./Pages/MoviesPLP";
-import Search from "./Components/Search";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import MoviesPDP from "./Pages/MoviesPDP";
 import ShowsPDP from "./Pages/ShowsPDP";
+import SearchPage from "./Pages/SearchPage";
 
 
 function App() {
@@ -24,7 +24,8 @@ function App() {
         <Route path="moviesPLP/movie/pdp/:id" element={<MoviesPDP />} />
         <Route path="/show/pdp/:id" element={<ShowsPDP />} />
         <Route path="showsPLP/show/pdp/:id" element={<ShowsPDP />} />
-        <Route path="/search" element = {<Search />} />
+        <Route path="/search" element = {<SearchPage />} />
+        <Route path="/search/movie/pdp/:id" element = {<MoviesPDP />} />
       </Routes>
     </>
   )
