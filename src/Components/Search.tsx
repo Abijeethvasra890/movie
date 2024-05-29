@@ -39,17 +39,17 @@ const Search = () => {
           Search
         </button>
       </form>
-      <div className="mt-10 w-[1150px]  search-results grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+      <div className="mt-10 mb-20 w-screen md:w-[1150px] search-results flex flex-col items-center sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
         {results.map((movie) => (
-          <div key={movie.id} className="movie w-48 bg-neutral-800 rounded-md p-2">
+          <div key={movie.id} className="movie w-60 md:w-48 bg-neutral-800 rounded-md p-2">
             <Link to={`movie/pdp/${movie.id}`}>
               <img
-                className="w-48 rounded-md"
+                className="w-60 md:w-48 rounded-md"
                 src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                 alt={movie.title}
               />
-              <div className="movie-info mt-2">
-                <h3 className="text-white">{movie.title}</h3>
+              <div className="movie-info ">
+                <h3 className="text-white ">{movie.title}</h3>
               </div>
             </Link>
           </div>
