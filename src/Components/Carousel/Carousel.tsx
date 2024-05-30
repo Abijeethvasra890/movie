@@ -5,7 +5,6 @@ import './Carousel.css';
 import { Link } from "react-router-dom";
 import { CardContainer } from "../ui/3dcard";
 import { addToWatchlist } from "../../utils/WatchList";
-import { auth } from "../../firebaseConfig";
 import { useUser } from "../../Context/UserContext";
 
 type PropsType = {
