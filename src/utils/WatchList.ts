@@ -1,6 +1,15 @@
 import { db } from '../firebaseConfig';
 import { collection, addDoc, doc, deleteDoc, getDocs } from 'firebase/firestore';
 
+type Movie = {
+  id: number;
+  title: string;
+  poster_path: string;
+  backdrop_path: string;
+  overview: string;
+  name:string
+};
+
 export const addToWatchlist = async (userId: string, movie: Movie) => {
   try {
     const userWatchlistRef = collection(db, `users/${userId}/watchlist`);
