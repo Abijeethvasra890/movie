@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { auth, db, googleProvider } from '../../firebaseConfig';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { doc, setDoc } from 'firebase/firestore';
 import Navbar from '../Navbar';
+//import { useUser } from '../../Context/UserContext';
 
 const Login = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const navigate = useNavigate();
-  const user = auth?.currentUser;
+  //const user = useUser();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

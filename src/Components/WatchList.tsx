@@ -1,6 +1,6 @@
 // src/components/Watchlist.tsx
 import React, { useEffect, useState } from 'react';
-import { auth, db } from '../firebaseConfig';
+import { db } from '../firebaseConfig';
 import { collection, getDocs } from 'firebase/firestore';
 import CarouselCard from './CarouselCard';
 import { CardContainer } from './ui/3dcard';
