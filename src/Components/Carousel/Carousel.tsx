@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { CardContainer } from "../ui/3dcard";
 import { addToWatchlist } from "../../utils/WatchList";
 import { auth } from "../../firebaseConfig";
+import { useUser } from "../../Context/UserContext";
 
 type PropsType = {
   search: string;
@@ -55,7 +56,7 @@ const Carousel = ({main, search, third, pdppage}:PropsType) => {
   if(main == "movie") movieCheck = true;
 
   const handleAddWatchList = (movie: Movie) => {
-    let user = auth?.currentUser;
+    let {user} = useUser();
     if (user) {
       addToWatchlist(user.uid, movie);
     } else {
@@ -93,11 +94,14 @@ const Carousel = ({main, search, third, pdppage}:PropsType) => {
                 <CarouselCard movie={movie} />
               </CardContainer>
             ) : (
-              <Link key={movie.id} to={`show/pdp/${movie.id}`}>
-                <CardContainer>
-                  <CarouselCard movie={movie} />
-                </CardContainer>
-              </Link>
+              <div className="flex flex-col h-96">
+                <Link key={movie.id} to={`show/pdp/${movie.id}`}>
+                  <CardContainer>
+                    <CarouselCard movie={movie} />
+                  </CardContainer>
+                </Link>
+                <button className='bg-neutral-800 text-white mt-5 w-36 p-2' onClick={() => handleAddWatchList(movie)}>Add to WatchList</button>
+              </div>
             )
           ))
         )}
