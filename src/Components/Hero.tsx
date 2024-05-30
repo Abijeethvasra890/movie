@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { fetchData } from '../utils/FetchData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleLeft, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
+// import StarRating from './StarRating';
 
 type PropsType = {
   search: string;
@@ -16,6 +17,7 @@ type Movie = {
   overview: string;
   original_name?:string;
   name?:string;
+  vote_average:number;
 };
 
 
@@ -23,14 +25,14 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
   const [data, setData] = useState<Movie[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [index, setIndex] = useState<number>(0);
- 
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   useEffect(() => {
     const getData = async () => {
       try {
         const data = await fetchData({ mainTerm: main, searchTerm: search, thirdTerm: third });
-        //console.log(data);
-        if (pdp) setData([data]); // Ensure data is an array
+        console.log(data);
+        if (pdp) setData([data]); 
         else setData(data.results);
       } catch (error) {
         console.error('Failed to fetch data:', error);
@@ -59,6 +61,20 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
     setIndex((prevIndex) => (prevIndex + 1) % data.length);
   };
 
+  const truncateText = (text: string, limit: number) => {
+    const words = text.split(' ');
+    if (words.length > limit) {
+      return words.slice(0, limit).join(' ') + '...';
+    }
+    return text;
+  };
+
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+
+
   const imageBaseUrl = "https://image.tmdb.org/t/p/original"; 
 
   return (
@@ -74,9 +90,18 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
                 src={`${imageBaseUrl}${data[index]?.backdrop_path}`} 
                 alt={data[index]?.title || data[index]?.name} 
               />
+             
               <div className="md:absolute md:top-0 md:z-10 md:flex md:flex-col md:justify-center md:bottom-0 md:left-10 md:p-4 md:w-4/12 rounded-[80px] bg-black bg-opacity-80">
                 <h1 className="text-2xl text-white">{data[index]?.title || data[index]?.name}</h1>
-                <p className="text-white">{data[index]?.overview}</p>
+                {/* <StarRating rating={data[index].vote_average} /> */}
+                <p className="text-white">
+                  {isExpanded ? data[index]?.overview : truncateText(data[index]?.overview || '', 50)}
+                  {data[index]?.overview.split(' ').length > 50 && (
+                    <span className="text-red-500 cursor-pointer" onClick={toggleExpand}>
+                      {isExpanded ? ' Show Less' : ' Read More'}
+                    </span>
+                  )}
+                </p>
               </div>
               {!pdp && (
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 z-20">
@@ -88,6 +113,7 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
                   <FontAwesomeIcon icon={faArrowCircleRight} onClick={handleNext} className="text-white text-2xl cursor-pointer" />
                 </div>
               )}
+
             </div>
           )}
           {pdp && (
@@ -99,7 +125,16 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
               />
               <div className="md:absolute md:top-0 md:z-10 md:flex md:flex-col md:justify-center md:bottom-0 md:left-10 md:p-4 md:w-4/12 rounded-[80px] bg-black bg-opacity-80">
                 <h1 className="text-2xl text-white">{data[0]?.title || data[0]?.original_name}</h1>
-                <p className="text-white">{data[0]?.overview}</p>
+                {/* <StarRating rating={data[index].vote_average} /> */}
+                <p className="text-white">
+                  {isExpanded ? data[index]?.overview : truncateText(data[index]?.overview || '', 50)}
+                  {data[index]?.overview.split(' ').length > 50 && (
+                    <span className="text-red-500 cursor-pointer" onClick={toggleExpand}>
+                      {isExpanded ? ' Show Less' : ' Read More'}
+                    </span>
+                  )}
+                </p>
+                
               </div>
             </div>
           )}

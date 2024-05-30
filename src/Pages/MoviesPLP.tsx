@@ -17,7 +17,7 @@ const MoviesPLP = () => {
             <Carousel main="movie" search="top_rated"/>
             <Carousel main="movie" search="now_playing"/>
             <Footer />
-             <div className="mb-28"></div>
+            <div className="mb-20 md:mb-0"></div>
         </div>
     </div>
   )

@@ -22,7 +22,7 @@ const ShowsPDP = () => {
           <DetailCard mainTerm='tv' searchTerm={id || ''} id={id || ''} />
           <Carousel main={id || ''} search="tv" third='aggregate_credits' pdppage={true}/>
           <Footer />
-          <div className="mb-28"></div>
+          <div className="mb-20 md:mb-0"></div>
       </div>
     </div>
 

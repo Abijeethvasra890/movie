@@ -1,15 +1,18 @@
 
+import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar'
 import Search from '../Components/Search'
 
 const SearchPage = () => {
   return (
-    <div className='flex flex-col-reverse md:flex md:flex-row h-screen bg-black overflow-hidden'>
+    <div className='md:flex md:flex-row h-screen bg-black overflow-hidden'>
         <Navbar />
-        <div className='flex items-center md:ml-28 bg-black'>
+        <div className='md:ml-28'>
             <Search />
+            <Footer />
+            <div className="mb-20 md:mb-0"></div>
         </div>
-        
+       
     </div>
   )
 }

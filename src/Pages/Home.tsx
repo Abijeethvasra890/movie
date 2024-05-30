@@ -2,6 +2,7 @@ import Carousel from "../Components/Carousel/Carousel"
 import Footer from "../Components/Footer"
 import Hero from "../Components/Hero"
 import Navbar from "../Components/Navbar"
+import Watchlist from "../Components/WatchList"
 
 const Home = () => {
   return (
@@ -11,10 +12,11 @@ const Home = () => {
         </div>
         <div className="md:ml-28">
             <Hero main="movie" search="trending" third="day"/>
+            <Watchlist />
             <Carousel main="movie" search="top_rated"/>
             <Carousel main ="tv" search="top_rated"/>
             <Footer />
-            <div className="mb-28"></div>
+            <div className="mb-20 md:mb-0"></div>
         </div>
     </div>
   )

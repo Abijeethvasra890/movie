@@ -17,7 +17,7 @@ const Search = () => {
     e.preventDefault();
     try {
       const data = await searchMovies(query);
-      console.log(data);
+      //console.log(data);
       setResults(data.results);
     } catch (error) {
       console.error('Failed to fetch search results:', error);

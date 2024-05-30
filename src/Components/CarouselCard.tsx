@@ -29,7 +29,7 @@ const CarouselCard = ({ movie }: PropsType) => {
       <CardBody>
         <CardItem>
         <img
-        className="rounded-md"
+        className="rounded-md shadow-inner shadow-slate-300"
         src={`${imageBaseUrl}${movie.known_for_department ? movie.profile_path : movie.poster_path}`}
         alt={movie.title || movie.name || "Movie Poster"}
       />

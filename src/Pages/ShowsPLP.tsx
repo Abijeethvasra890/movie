@@ -17,7 +17,7 @@ const ShowsPLP = () => {
             <Carousel main="tv" search="on_the_air"/>
             <Carousel main="tv" search="airing_today"/>
             <Footer />
-            <div className="mb-28"></div>
+            <div className="mb-20 md:mb-0"></div>
         </div>
     </div>
   )

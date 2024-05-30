@@ -5,7 +5,7 @@ import { faHome, faFilm, faTv, faSearch, faQuestionCircle, IconDefinition  } fro
 
 type PropsType = {
     url: string;
-    name: string;
+    name: string | null;
 }
 
 const NavBarLinks = ({url,name}:PropsType) => {
@@ -31,7 +31,7 @@ const NavBarLinks = ({url,name}:PropsType) => {
                 className={location.pathname === url ? 'text-red-500' : 'text-white'}
             >
                 <div className="flex flex-col items-center justify-center"> 
-                    <FontAwesomeIcon icon={getIcon(url)} className="mr-2" />
+                    <FontAwesomeIcon icon={getIcon(url)} />
                     {name}
                 </div>
             </Link>

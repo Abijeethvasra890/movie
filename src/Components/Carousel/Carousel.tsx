@@ -4,6 +4,8 @@ import CarouselCard from "../CarouselCard";
 import './Carousel.css';
 import { Link } from "react-router-dom";
 import { CardContainer } from "../ui/3dcard";
+import { addToWatchlist } from "../../utils/WatchList";
+import { auth } from "../../firebaseConfig";
 
 type PropsType = {
   search: string;
@@ -51,14 +53,22 @@ const Carousel = ({main, search, third, pdppage}:PropsType) => {
 
   let movieCheck = false;
   if(main == "movie") movieCheck = true;
-  
+
+  const handleAddWatchList = (movie: Movie) => {
+    let user = auth?.currentUser;
+    if (user) {
+      addToWatchlist(user.uid, movie);
+    } else {
+      alert('Please login to add to watchlist');
+    }
+  };
  // console.log(data);
   return (
     <div className="m-3 overflow-hidden md:w-[1150px]">
       <p className="text-white">
         {pdppage ? "Cast" : `${capitalizeFirstLetter(main)} ${search}`}
       </p>
-      <div className="flex gap-2 bg-stone-800 p-3 overflow-x-scroll hide-scrollbar rounded-xl" >
+      <div className="flex gap-4 p-3 overflow-x-scroll hide-scrollbar rounded-xl" >
         {data.length > 1 && movieCheck ? (
          data.map((movie) => (
           pdppage ? (
@@ -66,11 +76,14 @@ const Carousel = ({main, search, third, pdppage}:PropsType) => {
               <CarouselCard movie={movie} />
             </CardContainer>
           ) : (
-            <Link key={movie.id} to={`movie/pdp/${movie.id}`}>
-              <CardContainer>
-                <CarouselCard movie={movie} />
-              </CardContainer>
-            </Link>
+            <div className="flex flex-col h-96">
+              <Link key={movie.id} to={`movie/pdp/${movie.id}`}>
+                <CardContainer>
+                  <CarouselCard movie={movie} />
+                </CardContainer>
+              </Link>
+              <button className='bg-neutral-800 text-white mt-5 w-36 p-2' onClick={() => handleAddWatchList(movie)}>Add to WatchList</button>
+            </div>
           )
         ))
         ) : (
