@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebaseConfig'; 
 
-interface UserContextType {
+type UserContextType =  {
   user: User | null;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
 }

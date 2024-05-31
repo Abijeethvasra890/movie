@@ -25,11 +25,11 @@ const CarouselCard = ({ movie }: PropsType) => {
   const imageBaseUrl = "https://image.tmdb.org/t/p/original";
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col max-h-80">
       <CardBody>
         <CardItem>
         <img
-        className="rounded-md shadow-inner shadow-slate-300"
+        className="rounded-md"
         src={`${imageBaseUrl}${movie.known_for_department ? movie.profile_path : movie.poster_path}`}
         alt={movie.title || movie.name || "Movie Poster"}
       />

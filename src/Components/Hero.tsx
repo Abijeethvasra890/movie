@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { fetchData } from '../utils/FetchData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleLeft, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
-// import StarRating from './StarRating';
+import StarRating from './StarRating';
 
 type PropsType = {
   search: string;
@@ -18,6 +18,7 @@ type Movie = {
   original_name?:string;
   name?:string;
   vote_average:number;
+  vote_count:number;
 };
 
 
@@ -78,7 +79,7 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
   const imageBaseUrl = "https://image.tmdb.org/t/p/original"; 
 
   return (
-    <div className="flex max-w-[1150px] md:h-[375px] m-auto p-4 ml-3 relative">
+    <div className="flex max-w-[1150px] md:h-[375px] m-auto p-4 ml-3 relative shadow-red-800 shadow-2xl">
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -86,14 +87,19 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
           {data.length > 1 && (
             <div>
               <img 
-                className='md:absolute md:top-0 md:right-0 md:h-[100%] md:w-[72%]'
+                className='md:absolute md:top-0 md:right-0 md:h-[100%] md:w-[72%] object-cover '
                 src={`${imageBaseUrl}${data[index]?.backdrop_path}`} 
                 alt={data[index]?.title || data[index]?.name} 
               />
              
-              <div className="md:absolute md:top-0 md:z-10 md:flex md:flex-col md:justify-center md:bottom-0 md:left-10 md:p-4 md:w-4/12 rounded-[80px] bg-black bg-opacity-80">
+              <div className="md:absolute md:top-0 md:z-10 md:flex md:flex-col md:justify-center md:bottom-0 md:backdrop-blur-2xl md:left-10 md:p-4 md:w-4/12 rounded-[50px] bg-black bg-opacity-70 backdrop-brightness-200">
                 <h1 className="text-2xl text-white">{data[index]?.title || data[index]?.name}</h1>
-                {/* <StarRating rating={data[index].vote_average} /> */}
+               
+                <div className='flex items-center gap-2'>
+                  <StarRating rating={data[index].vote_average} /> 
+                  <p className="text-white text-sm">( {data[index].vote_count} )</p>
+                </div>
+               
                 <p className="text-white">
                   {isExpanded ? data[index]?.overview : truncateText(data[index]?.overview || '', 50)}
                   {data[index]?.overview.split(' ').length > 50 && (
@@ -125,7 +131,7 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
               />
               <div className="md:absolute md:top-0 md:z-10 md:flex md:flex-col md:justify-center md:bottom-0 md:left-10 md:p-4 md:w-4/12 rounded-[80px] bg-black bg-opacity-80">
                 <h1 className="text-2xl text-white">{data[0]?.title || data[0]?.original_name}</h1>
-                {/* <StarRating rating={data[index].vote_average} /> */}
+                <StarRating rating={data[index].vote_average} /> 
                 <p className="text-white">
                   {isExpanded ? data[index]?.overview : truncateText(data[index]?.overview || '', 50)}
                   {data[index]?.overview.split(' ').length > 50 && (

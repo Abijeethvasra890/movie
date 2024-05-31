@@ -32,3 +32,15 @@ export const removeFromWatchlist = async (userId: string, movieId: number) => {
     console.error('Error removing from watchlist:', error);
   }
 };
+
+export const fetchWatchlist = async (userId: string) => {
+  try {
+    const userWatchlistRef = collection(db, `users/${userId}/watchlist`);
+    const watchlistSnapshot = await getDocs(userWatchlistRef);
+    const watchlistData = watchlistSnapshot.docs.map((doc) => doc.data() as Movie);
+    return watchlistData;
+  } catch (error) {
+    console.error('Failed to fetch watchlist:', error);
+  } 
+};
+
