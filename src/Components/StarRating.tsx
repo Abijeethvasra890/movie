@@ -1,4 +1,4 @@
-import ReactStars from 'react-rating-stars-component';
+import StarRatings from 'react-star-ratings';
 
 type StarRatingProps = {
   rating: number;
@@ -6,12 +6,13 @@ type StarRatingProps = {
 
 const StarRating = ({ rating }: StarRatingProps) => {
   return (
-    <ReactStars
-      count={5}
-      value={rating / 2}
-      size={20}
-      edit={false}
-      activeColor="#EF4444"
+    <StarRatings
+      rating={rating / 2}
+      starRatedColor="#EF4444"
+      numberOfStars={5}
+      name='rating'
+      starDimension="20px"
+      starSpacing="2px"
     />
   );
 };

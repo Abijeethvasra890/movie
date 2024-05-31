@@ -24,7 +24,7 @@ const Navbar = () => {
       <NavBarLinks url="/moviesplp" name="Movies" />
       <NavBarLinks url="/showsplp" name="Shows" />
       <NavBarLinks url="/search" name="Search" />
-      <NavBarLinks url="/login" name={user ? (user.displayName?.split(' ')[0]) : "Sign In" }/>
+      <NavBarLinks url="/login" name={user ? (user.displayName?.split(' ')[0]) : "Sign In" } photoURL={user?.photoURL}/>
       {user!=null && (
        <div>
             <button className="text-white" onClick={handleLogout}> Logout</button>

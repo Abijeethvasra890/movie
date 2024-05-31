@@ -14,7 +14,7 @@ export const addToWatchlist = async (userId: string, movie: Movie) => {
   try {
     const userWatchlistRef = collection(db, `users/${userId}/watchlist`);
     await addDoc(userWatchlistRef, movie);
-    console.log("added movie")
+    console.log(movie)
   } catch (error) {
     console.error('Error adding to watchlist:', error);
   }
