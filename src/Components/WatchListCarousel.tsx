@@ -16,7 +16,7 @@ const WatchListCarousel = () => {
   }
 
   return (
-    <div className="m-3 overflow-hidden md:w-[1150px]">
+    <div className="m-3 overflow-hidden md:w-[1150px] md:mt-10">
       <p className="text-white">{user.displayName}'s Watchlist</p>
       <div className="flex gap-4 p-3 overflow-x-scroll hide-scrollbar rounded-xl">
         {watchlist.map((movie) => (

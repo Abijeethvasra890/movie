@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faFilm, faTv, faSearch, faQuestionCircle, IconDefinition  } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faFilm, faTv, faSearch, faQuestionCircle, IconDefinition, faUser  } from '@fortawesome/free-solid-svg-icons';
 
 
 type PropsType = {
     url: string;
-    name: string | null;
+    name: string | null | undefined;
 }
 
 const NavBarLinks = ({url,name}:PropsType) => {
@@ -19,6 +19,8 @@ const NavBarLinks = ({url,name}:PropsType) => {
             return faTv;
           case '/search':
             return faSearch;
+          case '/login':
+              return faUser;
           default:
             return faQuestionCircle;
         }
