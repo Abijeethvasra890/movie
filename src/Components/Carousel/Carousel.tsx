@@ -5,6 +5,8 @@ import './Carousel.css';
 import { Link } from "react-router-dom";
 import { CardContainer } from "../ui/3dcard";
 import { useWatchlist } from "../../Context/WatchListContext";
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 type PropsType = {
   search: string;
@@ -24,7 +26,7 @@ type Movie = {
 
 const Carousel = ({ main, search, third, pdppage }: PropsType) => {
   const [data, setData] = useState<Movie[]>([]);
-  //const { user } = useUser(); // Destructure user from useUser hook
+  const [loading, setLoading] = useState<boolean>(true);
   const { addMovieToWatchlist } = useWatchlist();
 
   useEffect(() => {
@@ -38,6 +40,8 @@ const Carousel = ({ main, search, third, pdppage }: PropsType) => {
         }
       } catch (error) {
         console.error('Failed to fetch data:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -55,56 +59,71 @@ const Carousel = ({ main, search, third, pdppage }: PropsType) => {
     addMovieToWatchlist(movie);
   };
 
+  const renderSkeletons = () => {
+    return Array.from({ length: 10 }).map((_, index) => (
+      <div className="flex flex-col h-96 justify-between" key={index}>
+        <CardContainer>
+          <Skeleton height={300} width={144} baseColor="#1f2937" highlightColor="#374151"/>
+        </CardContainer>
+        <Skeleton width={144} height={36} className="mt-5"  baseColor="#1f2937" highlightColor="#374151"/>
+      </div>
+    ));
+  };
+
   return (
     <div className="m-3 overflow-hidden md:w-[1150px]">
       <p className="text-white">
         {pdppage ? "Cast" : `${capitalizeFirstLetter(main)} ${search}`}
       </p>
       <div className="flex gap-4 p-3 overflow-x-scroll hide-scrollbar rounded-xl">
-        {data.length > 1 && movieCheck ? (
-          data.map((movie) => (
-            pdppage ? (
-              <CardContainer key={movie.id}>
-                <CarouselCard movie={movie} />
-              </CardContainer>
-            ) : (
-              <div className="flex flex-col h-96 justify-between" key={movie.id}>
-                <Link to={`movie/pdp/${movie.id}`}>
-                  <CardContainer>
-                    <CarouselCard movie={movie} />
-                  </CardContainer>
-                </Link>
-                <button
-                  className="bg-neutral-800 opacity-70 rounded-sm text-white mt-5 w-36 p-2"
-                  onClick={() => handleAddWatchList(movie)}
-                >
-                  Add to WatchList
-                </button>
-              </div>
-            )
-          ))
+        {loading ? (
+          renderSkeletons()
         ) : (
-          data.map((movie) => (
-            pdppage ? (
-              <CardContainer key={movie.id}>
-                <CarouselCard movie={movie} />
-              </CardContainer>
-            ) : (
-              <div className="flex flex-col h-96 justify-between" key={movie.id}>
-                <Link to={`show/pdp/${movie.id}`}>
-                  <CardContainer>
-                    <CarouselCard movie={movie} />
-                  </CardContainer>
-                </Link>
-                <button
-                  className="bg-neutral-800 opacity-70 rounded-sm text-white mt-5 w-36 p-2"
-                  onClick={() => handleAddWatchList(movie)}
-                >
-                  Add to WatchList
-                </button>
-              </div>
-            )
-          ))
+          data.length > 1 && movieCheck ? (
+            data.map((movie) => (
+              pdppage ? (
+                <CardContainer key={movie.id}>
+                  <CarouselCard movie={movie} />
+                </CardContainer>
+              ) : (
+                <div className="flex flex-col h-96 justify-between" key={movie.id}>
+                  <Link to={`movie/pdp/${movie.id}`}>
+                    <CardContainer>
+                      <CarouselCard movie={movie} />
+                    </CardContainer>
+                  </Link>
+                  <button
+                    className="bg-neutral-800 opacity-70 rounded-sm text-white w-36 p-2"
+                    onClick={() => handleAddWatchList(movie)}
+                  >
+                    Add to WatchList
+                  </button>
+                </div>
+              )
+            ))
+          ) : (
+            data.map((movie) => (
+              pdppage ? (
+                <CardContainer key={movie.id}>
+                  <CarouselCard movie={movie} />
+                </CardContainer>
+              ) : (
+                <div className="flex flex-col h-96 justify-between" key={movie.id}>
+                  <Link to={`show/pdp/${movie.id}`}>
+                    <CardContainer>
+                      <CarouselCard movie={movie} />
+                    </CardContainer>
+                  </Link>
+                  <button
+                    className="bg-neutral-800 opacity-70 rounded-sm text-white mt-5 w-36 p-2"
+                    onClick={() => handleAddWatchList(movie)}
+                  >
+                    Add to WatchList
+                  </button>
+                </div>
+              )
+            ))
+          )
         )}
       </div>
     </div>
