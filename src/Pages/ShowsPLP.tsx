@@ -1,6 +1,7 @@
 import Carousel from "../Components/Carousel/Carousel"
 import Footer from "../Components/Footer"
 import Hero from "../Components/Hero"
+
 import Navbar from "../Components/Navbar"
 
 

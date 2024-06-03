@@ -43,3 +43,20 @@ export const searchMovies = async (query:string) => {
   return data;
 };
 
+export const fetchMovieTrailer = async (movieId: number): Promise<any> => {
+  try {
+    const url = `https://api.themoviedb.org/3/movie/${movieId}/videos`;
+    const response = await fetch(url, options);
+    
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.error('Failed to fetch movie trailer:', err);
+    throw err;
+  }
+};
