@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import { fetchData } from '../utils/FetchData';
-import { fetchMovieTrailer } from '../utils/FetchData'; // Assume you have this utility to fetch movie trailer
+import { fetchData } from '../../utils/FetchData';
+import { fetchMovieTrailer } from '../../utils/FetchData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleLeft, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
-import StarRating from './StarRating';
 import './Hero.css'
+import Trailer from './Trailer';
+import HeroImage from './HeroImage';
+import HeroDetails from './HeroDetails';
 
 type PropsType = {
   search: string;
@@ -67,13 +69,7 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
     setIndex((prevIndex) => (prevIndex + 1) % data.length);
   };
 
-  const truncateText = (text: string, limit: number) => {
-    const words = text.split(' ');
-    if (words.length > limit) {
-      return words.slice(0, limit).join(' ') + '...';
-    }
-    return text;
-  };
+
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -106,6 +102,7 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
     setPaused(false);
     setShowTrailer(false);
     setTrailerUrl(null);
+   
   };
 
   const imageBaseUrl = 'https://image.tmdb.org/t/p/original';
@@ -123,40 +120,11 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
           {data.length > 1 && (
             <div>
               {showTrailer && trailerUrl ? (
-                <>
-                <p>I am in iframe</p>
-                <iframe
-                  className="md:absolute md:top-0 md:right-0 md:h-[100%] md:w-[80%] object-cover"
-                  src={trailerUrl}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  title="movie trailer"
-                >
-                </iframe>
-                </>
+                <Trailer trailerUrl={trailerUrl} />
               ) : (
-                <img
-                  className="md:absolute md:top-0 md:right-0 md:h-[100%] md:w-[80%] object-cover "
-                  src={`${imageBaseUrl}${data[index]?.backdrop_path}`}
-                  alt={data[index]?.title || data[index]?.name}
-                />
+               <HeroImage data={data[index]} imageBaseUrl={imageBaseUrl}/>
               )}
-              <div className="md:absolute md:top-0 md:z-10 md:flex md:flex-col md:justify-center md:bottom-0 md:left-10 md:p-4 md:w-4/12 hero-image">
-                <h1 className="text-2xl text-white">{data[index]?.title || data[index]?.name}</h1>
-                <div className="flex items-center gap-2">
-                  <StarRating rating={data[index].vote_average} />
-                  <p className="text-white text-sm">( {data[index].vote_count} )</p>
-                </div>
-                <p className="text-white">
-                  {isExpanded ? data[index]?.overview : truncateText(data[index]?.overview || '', 50)}
-                  {data[index]?.overview.split(' ').length > 50 && (
-                    <span className="text-red-500 cursor-pointer" onClick={toggleExpand}>
-                      {isExpanded ? ' Show Less' : ' Read More'}
-                    </span>
-                  )}
-                </p>
-              </div>
+              <HeroDetails data={data[index]} isExpanded = {isExpanded} toggleExpand={toggleExpand}/>
               {!pdp && (
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 z-20">
                   <FontAwesomeIcon icon={faArrowCircleLeft} onClick={handlePrevious} className="text-white text-2xl cursor-pointer" />
@@ -171,23 +139,8 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
           )}
           {pdp && (
             <div>
-              <img
-                className="md:absolute md:top-0 md:right-0 md:h-[100%] md:w-[72%]"
-                src={`${imageBaseUrl}${data[0]?.backdrop_path}`}
-                alt={data[0]?.title || data[0]?.original_name}
-              />
-              <div className="md:absolute md:top-0 md:z-10 md:flex md:flex-col md:justify-center md:bottom-0 md:left-10 md:p-4 md:w-4/12 rounded-[80px] bg-black bg-opacity-80">
-                <h1 className="text-2xl text-white">{data[0]?.title || data[0]?.original_name}</h1>
-                <StarRating rating={data[0].vote_average} />
-                <p className="text-white">
-                  {isExpanded ? data[0]?.overview : truncateText(data[0]?.overview || '', 50)}
-                  {data[0]?.overview.split(' ').length > 50 && (
-                    <span className="text-red-500 cursor-pointer" onClick={toggleExpand}>
-                      {isExpanded ? ' Show Less' : ' Read More'}
-                    </span>
-                  )}
-                </p>
-              </div>
+              <HeroImage data={data[0]} imageBaseUrl={imageBaseUrl}/>
+              <HeroDetails data={data[0]} isExpanded = {isExpanded} toggleExpand={toggleExpand}/>
             </div>
           )}
         </>

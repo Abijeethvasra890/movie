@@ -3,7 +3,7 @@ import Navbar from '../Components/Navbar';
 import Carousel from '../Components/Carousel/Carousel';
 import DetailCard from '../Components/DetailCard';
 import Footer from '../Components/Footer';
-import Hero from '../Components/Hero';
+import Hero from '../Components/Hero/Hero';
 
 type Params = {
   id: string;
