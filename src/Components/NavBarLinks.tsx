@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faFilm, faTv, faSearch, faQuestionCircle, IconDefinition, faUser } from '@fortawesome/free-solid-svg-icons';
 
@@ -8,7 +8,9 @@ type PropsType = {
   photoURL?: string | null | undefined;
 };
 
-const NavBarLinks = ({ url, name, photoURL }: PropsType) => {
+const NavBarLinks = ({ url, name, photoURL  }: PropsType) => {
+  const location = useLocation();
+
   const getIcon = (url: string): IconDefinition => {
     switch (url) {
       case '/':
@@ -27,26 +29,24 @@ const NavBarLinks = ({ url, name, photoURL }: PropsType) => {
   };
 
   return (
-    <div>
-      <div className="md:mb-10">
-        <Link 
-          to={url}  
-          className={location.pathname === url ? 'text-red-500' : 'text-white'}
-        >
-          <div className="flex flex-col items-center justify-center">
-            {url === '/login' && photoURL ? (
-              <img
-                src={photoURL}
-                alt={name || 'User'}
-                className="w-8 h-8 rounded-full"
-              />
-            ) : (
-              <FontAwesomeIcon icon={getIcon(url)} />
-            )}
-            {name}
-          </div>
-        </Link>
-      </div>
+    <div className="md:mb-10">
+      <Link 
+        to={url}  
+        className={`group flex flex-col items-center justify-center ${location.pathname === url ? 'text-red-500' : 'text-white'}`}
+      >
+        {url === '/login' && photoURL ? (
+          <>
+            <img
+              src={photoURL}
+              alt={name || 'User'}
+              className="w-8 h-8 rounded-full"
+            />
+          </>
+        ) : (
+          <FontAwesomeIcon icon={getIcon(url)} className="text-2xl" />
+        )}
+        <span className="hidden group-hover:block mt-1 text-sm">{name}</span>
+      </Link>
     </div>
   );
 };

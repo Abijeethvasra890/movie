@@ -2,10 +2,9 @@ import CarouselCard from './CarouselCard';
 import { CardContainer } from './ui/3dcard';
 import { useWatchlist } from '../Context/WatchListContext';
 import { useUser } from '../Context/UserContext';
-import { Link } from 'react-router-dom';
 
 const WatchListCarousel = () => {
-  const { watchlist, loading, removeMovieFromWatchlist } = useWatchlist();
+  const { watchlist, loading  } = useWatchlist();
   const { user } = useUser();
 
   if (loading) {
@@ -22,15 +21,7 @@ const WatchListCarousel = () => {
       <div className="flex gap-4 p-3 overflow-x-scroll hide-scrollbar rounded-xl">
         {watchlist.map((movie) => (
           <CardContainer key={movie.id} className="flex flex-col">
-            <Link to={movie.title? `movie/pdp/${movie.id}` : `show/pdp/${movie.id}` }>
-              <CarouselCard movie={movie} />
-            </Link>
-            <button
-              className="bg-neutral-800 text-white mt-5 w-36 p-2"
-              onClick={() => removeMovieFromWatchlist(movie.id)}
-            >
-              Remove from WatchList
-            </button>
+            <CarouselCard movie={movie} isWishList={true}/>
           </CardContainer>
         ))}
       </div>

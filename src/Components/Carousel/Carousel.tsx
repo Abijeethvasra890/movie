@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import { fetchData } from "../../utils/FetchData";
 import CarouselCard from "../CarouselCard";
 import './Carousel.css';
-import { Link } from "react-router-dom";
 import { CardContainer } from "../ui/3dcard";
-import { useWatchlist } from "../../Context/WatchListContext";
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import { capitalizeFirstLetter, splitcapitalizeFirstLetter } from "../../utils/CapitaliseHelper";
 
 type PropsType = {
   search: string;
@@ -27,7 +26,7 @@ type Movie = {
 const Carousel = ({ main, search, third, pdppage }: PropsType) => {
   const [data, setData] = useState<Movie[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const { addMovieToWatchlist } = useWatchlist();
+ 
 
   useEffect(() => {
     const getData = async () => {
@@ -48,16 +47,7 @@ const Carousel = ({ main, search, third, pdppage }: PropsType) => {
     getData();
   }, [search, main, third]);
 
-  const capitalizeFirstLetter = (text: string) => {
-    if (!text) return '';
-    return text.charAt(0).toUpperCase() + text.slice(1);
-  };
-
   const movieCheck = main === "movie";
-
-  const handleAddWatchList = (movie: Movie) => {
-    addMovieToWatchlist(movie);
-  };
 
   const renderSkeletons = () => {
     return Array.from({ length: 10 }).map((_, index) => (
@@ -73,7 +63,7 @@ const Carousel = ({ main, search, third, pdppage }: PropsType) => {
   return (
     <div className="m-3 overflow-hidden md:w-[1150px]">
       <p className="text-white">
-        {pdppage ? "Cast" : `${capitalizeFirstLetter(main)} ${search}`}
+        {pdppage ? "Cast" : `${capitalizeFirstLetter(main)} ${splitcapitalizeFirstLetter(search)}`}
       </p>
       <div className="flex gap-4 p-3 overflow-x-scroll hide-scrollbar rounded-xl">
         {loading ? (
@@ -82,22 +72,17 @@ const Carousel = ({ main, search, third, pdppage }: PropsType) => {
           data.length > 1 && movieCheck ? (
             data.map((movie) => (
               pdppage ? (
+                <>
                 <CardContainer key={movie.id}>
-                  <CarouselCard movie={movie} />
+                  <CarouselCard movie={movie} ispdp = {true}/>
                 </CardContainer>
+                 
+              </>
               ) : (
                 <div className="flex flex-col h-96 justify-between" key={movie.id}>
-                  <Link to={`movie/pdp/${movie.id}`}>
                     <CardContainer>
                       <CarouselCard movie={movie} />
                     </CardContainer>
-                  </Link>
-                  <button
-                    className="bg-neutral-800 opacity-70 rounded-sm text-white w-36 p-2"
-                    onClick={() => handleAddWatchList(movie)}
-                  >
-                    Add to WatchList
-                  </button>
                 </div>
               )
             ))
@@ -105,21 +90,13 @@ const Carousel = ({ main, search, third, pdppage }: PropsType) => {
             data.map((movie) => (
               pdppage ? (
                 <CardContainer key={movie.id}>
-                  <CarouselCard movie={movie} />
+                  <CarouselCard movie={movie} ispdp = {true} />
                 </CardContainer>
               ) : (
                 <div className="flex flex-col h-96 justify-between" key={movie.id}>
-                  <Link to={`show/pdp/${movie.id}`}>
                     <CardContainer>
                       <CarouselCard movie={movie} />
                     </CardContainer>
-                  </Link>
-                  <button
-                    className="bg-neutral-800 opacity-70 rounded-sm text-white mt-5 w-36 p-2"
-                    onClick={() => handleAddWatchList(movie)}
-                  >
-                    Add to WatchList
-                  </button>
                 </div>
               )
             ))
