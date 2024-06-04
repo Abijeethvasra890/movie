@@ -7,6 +7,7 @@ import './Hero.css'
 import Trailer from './Trailer';
 import HeroImage from './HeroImage';
 import HeroDetails from './HeroDetails';
+import Skeleton from 'react-loading-skeleton';
 
 type PropsType = {
   search: string;
@@ -107,6 +108,15 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
 
   const imageBaseUrl = 'https://image.tmdb.org/t/p/original';
 
+  const renderSkeletons = () => {
+    return (
+      <div className="flex flex-col h-96 justify-between">
+          <Skeleton height={300} width={1150} baseColor="#1f2937" highlightColor="#374151"/>
+      </div>
+    );
+  };
+  
+
   return (
     <div
       className="flex max-w-screen rounded-xl md:h-[375px] m-auto p-4 ml-3 relative shadow-red-800 shadow-2xl"
@@ -114,7 +124,7 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
       onMouseLeave={handleMouseLeave}
     >
       {loading ? (
-        <p>Loading...</p>
+        renderSkeletons()
       ) : (
         <>
           {data.length > 1 && (
