@@ -61,7 +61,7 @@ const Carousel = ({ main, search, third, pdppage }: PropsType) => {
   };
 
   return (
-    <div className="m-3 overflow-hidden max-w-screen">
+    <div className="m-3 overflow-hidden w-screen">
       <p className="text-white">
         {pdppage ? "Cast" : `${capitalizeFirstLetter(main)} ${splitcapitalizeFirstLetter(search)}`}
       </p>
