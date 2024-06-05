@@ -119,7 +119,7 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
 
   return (
     <div
-      className="flex max-w-screen rounded-xl md:h-[375px] m-auto p-4 ml-3 relative shadow-red-800 shadow-2xl"
+      className="flex max-w-screen rounded-xl md:h-[375px] max-w-[calc(100%-200px)] m-auto p-4 ml-3 relative shadow-red-800 shadow-2xl"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

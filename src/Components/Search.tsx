@@ -1,6 +1,8 @@
 import { FormEvent, useState } from 'react';
 import { searchMovies } from '../utils/FetchData';
 import { Link } from 'react-router-dom';
+//import { logSearch } from '../utils/api';
+//import { useUser } from '../Context/UserContext';
 
 type Movie = {
   id: number;
@@ -12,6 +14,7 @@ type Movie = {
 const Search = () => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<Movie[]>([]);
+  //const { user } = useUser();
 
   const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,6 +22,7 @@ const Search = () => {
       const data = await searchMovies(query);
       //console.log(data);
       setResults(data.results);
+      //logSearch(user.uid, "search","Thriller");
     } catch (error) {
       console.error('Failed to fetch search results:', error);
     }

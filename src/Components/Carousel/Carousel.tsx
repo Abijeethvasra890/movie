@@ -61,11 +61,11 @@ const Carousel = ({ main, search, third, pdppage }: PropsType) => {
   };
 
   return (
-    <div className="m-3 overflow-hidden md:w-[1150px]">
+    <div className="m-3 overflow-hidden max-w-screen">
       <p className="text-white">
         {pdppage ? "Cast" : `${capitalizeFirstLetter(main)} ${splitcapitalizeFirstLetter(search)}`}
       </p>
-      <div className="flex gap-4 p-3 overflow-x-scroll hide-scrollbar rounded-xl">
+      <div className="flex gap-4 p-3 overflow-x-scroll hide-scrollbar rounded-xl ">
         {loading ? (
           renderSkeletons()
         ) : (
