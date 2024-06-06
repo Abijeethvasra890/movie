@@ -1,11 +1,14 @@
 import CarouselCard from './CarouselCard';
 import { CardContainer } from './ui/3dcard';
 import { useWatchlist } from '../Context/WatchListContext';
-import { useUser } from '../Context/UserContext';
+//import { useUser } from '../Context/UserContext';
+import { useAuth } from '../Context/useAuth';
 
 const WatchListCarousel = () => {
   const { watchlist, loading  } = useWatchlist();
-  const { user } = useUser();
+  console.log(watchlist);
+  //const { user } = useUser();
+  const { user } = useAuth();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -17,7 +20,7 @@ const WatchListCarousel = () => {
 
   return (
     <div className="m-3 overflow-hidden md:w-[1150px] md:mt-10">
-      <p className="text-white">{user.displayName}'s Watchlist</p>
+      <p className="text-white">{user.display_name}'s Watchlist</p>
       <div className="flex gap-4 p-3 overflow-x-scroll hide-scrollbar rounded-xl">
         {watchlist.map((movie) => (
           <CardContainer key={movie.id} className="flex flex-col">

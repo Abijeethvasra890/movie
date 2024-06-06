@@ -1,6 +1,8 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { searchMovies } from '../utils/FetchData';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useAuth } from '../Context/useAuth';
 //import { logSearch } from '../utils/api';
 //import { useUser } from '../Context/UserContext';
 
@@ -11,10 +13,38 @@ type Movie = {
   release_date: string;
 };
 
+type Genre = {
+  genre_id: number;
+  genre_name: string;
+}
+
 const Search = () => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<Movie[]>([]);
   //const { user } = useUser();
+  const [genres, setGenres] = useState<Genre[]>([]);
+  const { user } = useAuth();
+  console.log(user?.id);
+  useEffect(() => {
+    const fetchGenres = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`http://localhost:3001/log/user-genres`, {
+          params: { user_id: user?.id },
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        console.log(response);
+        setGenres(response.data);
+      } catch (err) {
+        console.error('Failed to fetch genres:', err);
+      }
+    };
+
+    if (user) {
+      fetchGenres();
+    }
+  }, [user]);
+
 
   const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,7 +59,7 @@ const Search = () => {
   };
 
   return (
-    <div className="search-component mt-8 ml-5 h-screen overflow-auto">
+    <div className="mt-8 ml-5 flex flex-col">
       <p className="text-white text-2xl">Search</p>
       <form onSubmit={handleSearch} className="flex w-full justify-center mt-5">
         <input
@@ -43,8 +73,8 @@ const Search = () => {
           Search
         </button>
       </form>
-      <div className="mt-10 mb-20 w-screen md:w-[1150px] search-results flex flex-col items-center sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-        {results.map((movie) => (
+      <div className="mt-10 mb-20 w-screen md:w-screen search-results flex flex-col items-center sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+        {results.length > 0 ?results.map((movie) => (
           <div key={movie.id} className="movie w-60 md:w-48 bg-neutral-800 rounded-md p-2">
             <Link to={`movie/pdp/${movie.id}`}>
               <img
@@ -57,7 +87,13 @@ const Search = () => {
               </div>
             </Link>
           </div>
-        ))}
+        )): <div className='text-white'>
+             <ul>
+              {genres.map((genre, index) => (
+                <li key={index}>{genre.genre_name}</li>
+              ))}
+            </ul>
+          </div>}
       </div>
     </div>
   );

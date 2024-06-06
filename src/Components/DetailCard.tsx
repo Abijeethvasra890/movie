@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchData } from '../utils/FetchData';
+import axios from 'axios';
+import { useAuth } from '../Context/useAuth';
 
 type PropsType = {
   mainTerm: string;
@@ -25,6 +27,7 @@ type Movie = {
 
 const DetailCard = ({ mainTerm, searchTerm, id }: PropsType) => {
   const [movie, setMovie] = useState<Movie | null>(null);
+  const {user} = useAuth();
 
   useEffect(() => {
     const getMovie = async () => {
@@ -37,6 +40,24 @@ const DetailCard = ({ mainTerm, searchTerm, id }: PropsType) => {
     };
     getMovie();
   }, [id, mainTerm, searchTerm]);
+
+  console.log(movie?.genres);
+  useEffect(() => {
+    const logVisit = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        await axios.post(
+          'http://localhost:3001/log/log-visit',
+          { genre: movie?.genres , user_id: user?.id },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+      } catch (err) {
+        console.error('Failed to log visit:', err);
+      }
+    };
+
+    if(movie?.genres) logVisit();
+  }, [movie]);
 
   if (!movie) {
     return <div className="text-white">Loading...</div>;

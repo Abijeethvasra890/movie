@@ -1,15 +1,18 @@
-import { signOut } from "firebase/auth";
-import { auth } from "../firebaseConfig";
+// import { signOut } from "firebase/auth";
+// import { auth } from "../firebaseConfig";
 import Logo from "./Logo";
 import NavBarLinks from "./NavBarLinks";
-import { useUser } from "../Context/UserContext";
+import { useAuth } from "../Context/useAuth";
+// import { useUser } from "../Context/UserContext";
 
 const Navbar = () => {
-  const { user } = useUser();
+  // const { user } = useUser();
+  const { user, logout } = useAuth();
+  console.log(user);
   
   const handleLogout = async () => {
     try {
-      await signOut(auth);
+      await logout();
       alert("Logged Out");
     } catch (err) {
       alert(err);
@@ -23,7 +26,7 @@ const Navbar = () => {
       <NavBarLinks url="/moviesplp" name="Movies" />
       <NavBarLinks url="/showsplp" name="Shows" />
       <NavBarLinks url="/search" name="Search" />
-      <NavBarLinks url="/login" name={user ? user.displayName?.split(' ')[0] : "Sign In"} photoURL={user?.photoURL} />
+      <NavBarLinks url="/login" name={user ? user.display_name?.split(' ')[0] : "Sign In"} photoURL={user?.photo_url} />
       {user && (
         <div>
           <button className="text-white" onClick={handleLogout}>Logout</button>
