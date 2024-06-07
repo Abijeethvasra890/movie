@@ -64,7 +64,7 @@ const DetailCard = ({ mainTerm, searchTerm, id }: PropsType) => {
   }
 
   return (
-    <div className="flex flex-col mt-5 items-center md:flex-row">
+    <div className="flex flex-col mt-5 items-center md:flex-row md:max-w-[calc(100%-200px)]">
       {mainTerm == "movie" ? (
         <>
           <img 
@@ -72,7 +72,7 @@ const DetailCard = ({ mainTerm, searchTerm, id }: PropsType) => {
             src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} 
             alt={movie.title} 
           />
-          <div className='text-white m-3 p-2 md:w-[890px] bg-neutral-800 rounded-xl h-80 flex flex-col justify-center'>
+          <div className='text-white m-3 p-2 md:w-[calc(100%-100px)] bg-neutral-800 rounded-xl h-80 flex flex-col justify-center'>
             <div className='p-2'>
               <h1 className="text-2xl mb-4">Story Line</h1>
               <p className="mb-4">{movie.overview}</p>

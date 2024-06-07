@@ -12,6 +12,7 @@ type PropsType = {
   main: string;
   third?: string;
   pdppage?: boolean;
+  isSearch?: boolean;
 };
 
 type Movie = {
@@ -23,7 +24,7 @@ type Movie = {
   name: string;
 };
 
-const Carousel = ({ main, search, third, pdppage }: PropsType) => {
+const Carousel = ({ main, search, third, pdppage, isSearch }: PropsType) => {
   const [data, setData] = useState<Movie[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
  
@@ -32,6 +33,8 @@ const Carousel = ({ main, search, third, pdppage }: PropsType) => {
     const getData = async () => {
       try {
         const data = await fetchData({ mainTerm: main, searchTerm: search, thirdTerm: third });
+        console.log(search);
+        console.log(data);
         if (data.cast) {
           setData(data.cast.slice(1, 10));
         } else {
@@ -62,10 +65,10 @@ const Carousel = ({ main, search, third, pdppage }: PropsType) => {
 
   return (
     <div className="m-3 overflow-hidden w-screen">
-      <p className="text-white">
-        {pdppage ? "Cast" : `${capitalizeFirstLetter(main)} ${splitcapitalizeFirstLetter(search)}`}
-      </p>
-      <div className="flex gap-4 p-3 overflow-x-scroll hide-scrollbar rounded-xl ">
+      {!isSearch && <p className="text-white">
+        {pdppage? "Cast" : `${capitalizeFirstLetter(main)} ${splitcapitalizeFirstLetter(search)}`}
+      </p>}
+      <div className="flex gap-5 p-3 overflow-x-scroll hide-scrollbar rounded-xl">
         {loading ? (
           renderSkeletons()
         ) : (

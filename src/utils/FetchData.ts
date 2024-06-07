@@ -14,7 +14,7 @@ type Propstype = {
 
 export const fetchData = async ({mainTerm, searchTerm, thirdTerm}:Propstype): Promise<any> => {
     try {
-        //console.log(`https://api.themoviedb.org/3/${mainTerm}/${searchTerm}/${thirdTerm}`);
+        console.log(`https://api.themoviedb.org/3/${mainTerm}/${searchTerm}/${thirdTerm}`);
         const url = thirdTerm !=null
         ? `https://api.themoviedb.org/3/${searchTerm}/${mainTerm}/${thirdTerm}`
         : `https://api.themoviedb.org/3/${mainTerm}/${searchTerm}`;
@@ -25,7 +25,7 @@ export const fetchData = async ({mainTerm, searchTerm, thirdTerm}:Propstype): Pr
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
         const data = await response.json();
-      //  console.log(data.cast);
+      console.log(data);
         return data;
     } catch (err) {
         console.error('Failed to fetch data:', err);

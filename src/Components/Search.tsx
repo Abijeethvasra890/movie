@@ -3,6 +3,7 @@ import { searchMovies } from '../utils/FetchData';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../Context/useAuth';
+import Carousel from './Carousel/Carousel';
 //import { logSearch } from '../utils/api';
 //import { useUser } from '../Context/UserContext';
 
@@ -21,10 +22,10 @@ type Genre = {
 const Search = () => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<Movie[]>([]);
-  //const { user } = useUser();
+  //const { user } = useAuth();
   const [genres, setGenres] = useState<Genre[]>([]);
   const { user } = useAuth();
-  console.log(user?.id);
+  //console.log(user?.id);
   useEffect(() => {
     const fetchGenres = async () => {
       try {
@@ -33,7 +34,7 @@ const Search = () => {
           params: { user_id: user?.id },
           headers: { Authorization: `Bearer ${token}` }
         });
-        console.log(response);
+        //console.log(response);
         setGenres(response.data);
       } catch (err) {
         console.error('Failed to fetch genres:', err);
@@ -59,7 +60,7 @@ const Search = () => {
   };
 
   return (
-    <div className="mt-8 ml-5 flex flex-col">
+    <div className="mt-8 ml-5 flex flex-col overflow-y-auto max-h-screen max-w-screen">
       <p className="text-white text-2xl">Search</p>
       <form onSubmit={handleSearch} className="flex w-full justify-center mt-5">
         <input
@@ -88,12 +89,21 @@ const Search = () => {
             </Link>
           </div>
         )): <div className='text-white'>
-             <ul>
-              {genres.map((genre, index) => (
-                <li key={index}>{genre.genre_name}</li>
-              ))}
-            </ul>
-          </div>}
+              {user?.id != null ? (
+                <>
+                  <p className='ml-3 text-xl'>Suggested based on your Interests: </p>
+                  {genres.map((genre) => (
+                    <div key={genre.genre_id}>
+                      <p className='m-5'>{genre.genre_name}</p>
+                      <Carousel main='discover' search={`movie?with_genres=${genre.genre_id}`} isSearch={true} />
+                    </div>
+                  ))}
+                </>
+              ) : (
+                "Login to see Suggestions"
+              )}
+            </div>
+      }
       </div>
     </div>
   );

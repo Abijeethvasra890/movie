@@ -24,7 +24,7 @@ const logGenreVisit = (req, res) => {
 const getUserGenres = (req, res) => {
     const { user_id } = req.query;
   console.log(req.query);
-  const query = 'SELECT DISTINCT genre_id, genre_name FROM user_genres WHERE user_id = ?';
+  const query = 'SELECT DISTINCT genre_id, genre_name FROM user_genres WHERE user_id = ? order by visited_at desc';
   db.query(query, [user_id], (err, results) => {
     if (err) {
       return res.status(500).json({ error: err.message });

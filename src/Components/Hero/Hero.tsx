@@ -111,7 +111,7 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
   const renderSkeletons = () => {
     return (
       <div className="flex flex-col h-96 justify-between">
-          <Skeleton height={300} width={1150} baseColor="#1f2937" highlightColor="#374151"/>
+          <Skeleton height={300} width={1200} baseColor="#1f2937" highlightColor="#374151"/>
       </div>
     );
   };
@@ -119,7 +119,7 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
 
   return (
     <div
-      className="flex max-w-screen rounded-xl md:h-[375px] max-w-[calc(100%-200px)] m-auto p-4 ml-3 relative shadow-red-800 shadow-2xl"
+      className="flex max-w-screen rounded-xl md:h-[375px] md:max-w-[calc(100%-200px)] m-auto p-4 ml-3 relative shadow-red-800 shadow-2xl"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
