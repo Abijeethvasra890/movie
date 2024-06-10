@@ -52,7 +52,7 @@ export const WatchlistProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       if (!user) return;
       try {
         const API_BASE_URL = 'https://movie-backend-1nau.onrender.com';
-        const response = await axios.get(`${API_BASE_URL}/${user.id}`)
+        const response = await axios.get(`${API_BASE_URL}/wishlist/${user.id}`)
         console.log(response);
         setWatchlist(response.data);
       } catch (error) {

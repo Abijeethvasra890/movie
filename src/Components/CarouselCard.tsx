@@ -15,6 +15,7 @@ type Movie = {
   known_for_department?: string;
   backdrop_path: string;
   overview: string;
+  poster?: string;
 };
 
 type PropsType = {
@@ -49,18 +50,18 @@ const CarouselCard = ({ movie, isWishList, ispdp }: PropsType) => {
     <div className="flex flex-col max-h-80 relative">
       <CardBody>
         <CardItem>
-          <Link to={movie.title ? `movie/pdp/${movie.id}` : `show/pdp/${movie.id}`}>
+          <Link to={movie.title ? `movie/pdp/${movie.id }` : `show/pdp/${movie.id}`}>
             <img
               className="rounded-md"
-              src={`${imageBaseUrl}${movie.known_for_department ? movie.profile_path : movie.poster_path}`}
-              alt={movie.title || movie.name || "Movie Poster"}
+              src={`${imageBaseUrl}${movie.known_for_department ? (movie.profile_path || movie.poster) : (movie.poster_path || movie.poster) }`}
+              alt={movie.title || movie.name }
             />
           </Link>
         </CardItem>
       </CardBody>
       <div className="flex justify-between items-center z-10">
         <div className="text-white">
-          {movie.title || movie.name}
+          {movie.title || movie.name }
         </div>
         {!ispdp ? (
           isWishList ? (
