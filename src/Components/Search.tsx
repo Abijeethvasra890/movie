@@ -30,7 +30,8 @@ const Search = () => {
     const fetchGenres = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`http://localhost:3001/log/user-genres`, {
+        const API_BASE_URL = 'https://movie-backend-1nau.onrender.com';
+        const response = await axios.get(`${API_BASE_URL}/log/user-genres`, {
           params: { user_id: user?.id },
           headers: { Authorization: `Bearer ${token}` }
         });

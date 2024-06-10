@@ -46,8 +46,9 @@ const DetailCard = ({ mainTerm, searchTerm, id }: PropsType) => {
     const logVisit = async () => {
       try {
         const token = localStorage.getItem('token');
+        const API_BASE_URL = 'https://movie-backend-1nau.onrender.com';
         await axios.post(
-          'http://localhost:3001/log/log-visit',
+          `${API_BASE_URL}/log/log-visit`,
           { genre: movie?.genres , user_id: user?.id },
           { headers: { Authorization: `Bearer ${token}` } }
         );

@@ -76,8 +76,9 @@ export const WatchlistProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   // };
 
   const addMovieToWatchlist = async (movie: Movie) => {
+    const API_BASE_URL = 'https://movie-backend-1nau.onrender.com';
     try {
-      await axios.post('http://localhost:3001/wishlist/add', {
+      await axios.post(`${API_BASE_URL}/wishlist/add`, {
         user_id: user?.id,
         movie_id: movie.id,
         movie_title: movie.title,
@@ -105,7 +106,8 @@ export const WatchlistProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
   const removeMovieFromWatchlist = async (movie_id: number) => {
     try {
-      await axios.post(`http://localhost:3001/wishlist/remove`, { user_id: user?.id, movie_id });
+      const API_BASE_URL = 'https://movie-backend-1nau.onrender.com';
+      await axios.post(`${API_BASE_URL}`, { user_id: user?.id, movie_id });
       setWatchlist(watchlist.filter((movie) => movie.id !== movie_id));
       console.log("removed from watchlist");
     } catch (error) {

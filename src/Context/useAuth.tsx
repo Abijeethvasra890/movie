@@ -19,9 +19,10 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const API_BASE_URL = 'https://movie-backend-1nau.onrender.com';
 
   const register = async (email: string, password: string, displayName: string, photoURL?: string) => {
-    await axios.post('http://localhost:3001/api/auth/register', {
+    await axios.post(`${API_BASE_URL}/api/auth/register`, {
       email,
       password,
       display_name: displayName,
@@ -30,7 +31,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const login = async (email: string, password: string) => {
-    const response = await axios.post('http://localhost:3001/api/auth/login', { email, password });
+    const response = await axios.post(`${API_BASE_URL}/api/auth/login`, { email, password });
     const { token, user } = response.data;
     localStorage.setItem('token', token);
     console.log("logged in");
