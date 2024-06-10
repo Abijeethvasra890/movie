@@ -8,12 +8,11 @@ import { useAuth } from "../Context/useAuth";
 const Navbar = () => {
   // const { user } = useUser();
   const { user, logout } = useAuth();
-  console.log(user);
+  //console.log(user);
   
   const handleLogout = async () => {
     try {
       await logout();
-      alert("Logged Out");
     } catch (err) {
       alert(err);
     }

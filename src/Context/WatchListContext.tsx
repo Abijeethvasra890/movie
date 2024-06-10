@@ -4,6 +4,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 // import { useUser } from './UserContext';
 import axios from 'axios';
 import { useAuth } from './useAuth';
+import { toast } from 'react-toastify';
 
 type WatchlistContextType = {
   watchlist: Movie[];
@@ -50,7 +51,9 @@ export const WatchlistProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     const fetchWatchlist = async () => {
       if (!user) return;
       try {
-        const response = await axios.get(`http://localhost:3001/wishlist/${user.id}`);
+        const API_BASE_URL = 'https://movie-backend-1nau.onrender.com';
+        const response = await axios.get(`${API_BASE_URL}/${user.id}`);
+        
         setWatchlist(response.data);
       } catch (error) {
         console.error('Error fetching wishlist', error);
@@ -84,6 +87,7 @@ export const WatchlistProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         movie_title: movie.title,
         movie_poster: movie.poster_path,
       });
+      toast.success('Added to watchlist');
       setWatchlist((prevWatchlist) => [...prevWatchlist, movie]);
     } catch (error) {
       console.error('Error adding to wishlist', error);
@@ -107,7 +111,8 @@ export const WatchlistProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const removeMovieFromWatchlist = async (movie_id: number) => {
     try {
       const API_BASE_URL = 'https://movie-backend-1nau.onrender.com';
-      await axios.post(`${API_BASE_URL}`, { user_id: user?.id, movie_id });
+      await axios.post(`${API_BASE_URL}/wishlist/remove`, { user_id: user?.id, movie_id });
+      toast.error('Removed from watchlist');
       setWatchlist(watchlist.filter((movie) => movie.id !== movie_id));
       console.log("removed from watchlist");
     } catch (error) {

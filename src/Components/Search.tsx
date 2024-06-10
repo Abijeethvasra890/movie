@@ -92,7 +92,7 @@ const Search = () => {
         )): <div className='text-white'>
               {user?.id != null ? (
                 <>
-                  <p className='ml-3 text-xl'>Suggested based on your Interests: </p>
+                  <p className='ml-3 text-l'>Suggested based on your Interests: </p>
                   {genres.map((genre) => (
                     <div key={genre.genre_id}>
                       <p className='m-5'>{genre.genre_name}</p>

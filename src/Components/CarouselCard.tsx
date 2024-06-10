@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useWatchlist } from "../Context/WatchListContext";
 import { CardBody, CardItem } from "./ui/3dcard";
+import { useAuth } from "../Context/useAuth";
 
 type Movie = {
   id: number;
@@ -23,6 +24,7 @@ type PropsType = {
 
 const CarouselCard = ({ movie, isWishList, ispdp }: PropsType) => {
   const { addMovieToWatchlist, removeMovieFromWatchlist } = useWatchlist();
+  const { user } = useAuth();
 
   if (!movie) {
     return null;
@@ -31,6 +33,9 @@ const CarouselCard = ({ movie, isWishList, ispdp }: PropsType) => {
   const imageBaseUrl = "https://image.tmdb.org/t/p/original";
 
   const handleAddWatchList = (movie: Movie) => {
+    if (!user) {
+      alert("Please log in to view your watchlist");
+    }
     addMovieToWatchlist(movie);
   };
 

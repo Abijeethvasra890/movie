@@ -10,7 +10,8 @@ import ShowsPDP from "./Pages/ShowsPDP";
 import SearchPage from "./Pages/SearchPage";
 import Register from "./Components/Auth/Register";
 import Login from "./Components/Auth/Login";
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   
@@ -31,6 +32,7 @@ function App() {
         <Route path="/register" element= {<Register />} />
         <Route path="/login" element= {<Login />} />
       </Routes>
+      <ToastContainer />
     </>
   )
 }

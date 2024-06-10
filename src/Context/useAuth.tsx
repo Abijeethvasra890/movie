@@ -1,5 +1,6 @@
 import { useState, useContext, createContext, ReactNode } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 interface User {
   id: number;
@@ -32,6 +33,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = async (email: string, password: string) => {
     const response = await axios.post(`${API_BASE_URL}/api/auth/login`, { email, password });
+    if (response.data) {
+      toast.success('Logged in successfully!');
+    } else {
+      toast.error('Login failed!');
+    }
     const { token, user } = response.data;
     localStorage.setItem('token', token);
     console.log("logged in");
@@ -41,6 +47,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => {
     localStorage.removeItem('token');
     setUser(null);
+    toast.success('Logged out successfully!');
   };
 
   return (

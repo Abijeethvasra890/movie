@@ -8,7 +8,7 @@ type PropsType = {
   photoURL?: string | null | undefined;
 };
 
-const NavBarLinks = ({ url, name, photoURL  }: PropsType) => {
+const NavBarLinks = ({ url, name }: PropsType) => {
   const location = useLocation();
 
   const getIcon = (url: string): IconDefinition => {
@@ -34,18 +34,10 @@ const NavBarLinks = ({ url, name, photoURL  }: PropsType) => {
         to={url}  
         className={`group flex flex-col items-center justify-center ${location.pathname === url ? 'text-red-500' : 'text-white'}`}
       >
-        {url === '/login' && photoURL ? (
-          <>
-            <img
-              src={photoURL}
-              alt={name || 'User'}
-              className="w-8 h-8 rounded-full"
-            />
-          </>
-        ) : (
-          <FontAwesomeIcon icon={getIcon(url)} className="text-2xl" />
-        )}
-        <span className="hidden group-hover:block mt-1 text-sm">{name}</span>
+        <FontAwesomeIcon icon={getIcon(url)} className="text-2xl" /> 
+        <span className="mt-1 text-sm transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+          {name}
+        </span>
       </Link>
     </div>
   );

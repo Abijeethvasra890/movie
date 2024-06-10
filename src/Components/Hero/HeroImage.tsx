@@ -1,3 +1,5 @@
+import './Hero.css'
+
 type PropsType = {
     imageBaseUrl : string;
     data :{
@@ -16,7 +18,7 @@ const HeroImage = ({data , imageBaseUrl}:PropsType ) => {
   return (
     <div>
         <img
-            className="md:absolute md:top-0 md:right-0 md:h-[100%] md:w-[80%] object-cover"
+            className="md:absolute md:top-0 md:right-0 md:h-[100%] md:w-[80%] object-cover hero-image"
             src={`${imageBaseUrl}${data?.backdrop_path}`}
             alt={data?.title || data?.name}
             />
