@@ -17,13 +17,13 @@ const WatchListCarousel = () => {
   return (
     <div className="m-3 overflow-hidden md:w-[1150px] md:mt-10">
       {user && <p className="text-white">{user?.display_name}'s Watchlist</p>}
-      <div className="flex gap-4 p-3 overflow-x-scroll hide-scrollbar rounded-xl">
+      {user && <div className="flex gap-4 p-3 overflow-x-scroll hide-scrollbar rounded-xl">
         {watchlist.map((movie) => (
           <CardContainer key={movie.id} className="flex flex-col">
             <CarouselCard movie={movie} isWishList={true}/>
           </CardContainer>
         ))}
-      </div>
+      </div>}
     </div>
   );
 };

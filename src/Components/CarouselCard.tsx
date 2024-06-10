@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useWatchlist } from "../Context/WatchListContext";
 import { CardBody, CardItem } from "./ui/3dcard";
 import { useAuth } from "../Context/useAuth";
+import { toast } from "react-toastify";
 
 type Movie = {
   id: number;
@@ -34,9 +35,10 @@ const CarouselCard = ({ movie, isWishList, ispdp }: PropsType) => {
 
   const handleAddWatchList = (movie: Movie) => {
     if (!user) {
-      alert("Please log in to view your watchlist");
+      toast.warning("Please log in to view your watchlist");
+    }else{
+      addMovieToWatchlist(movie);
     }
-    addMovieToWatchlist(movie);
   };
 
   const handleRemoveWatchList = (movieId: number) => {
