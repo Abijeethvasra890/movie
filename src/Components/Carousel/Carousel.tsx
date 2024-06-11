@@ -33,8 +33,8 @@ const Carousel = ({ main, search, third, pdppage, isSearch }: PropsType) => {
     const getData = async () => {
       try {
         const data = await fetchData({ mainTerm: main, searchTerm: search, thirdTerm: third });
-        console.log(search);
-        console.log(data);
+        //console.log(search);
+        //console.log(data);
         if (data.cast) {
           setData(data.cast.slice(1, 10));
         } else {

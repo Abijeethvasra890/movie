@@ -6,7 +6,7 @@ import { useAuth } from '../Context/useAuth';
 
 const WatchListCarousel = () => {
   const { watchlist, loading  } = useWatchlist();
-  console.log(watchlist);
+  //console.log(watchlist);
   //const { user } = useUser();
   const { user } = useAuth();
 

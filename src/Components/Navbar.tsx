@@ -19,7 +19,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="z-50 bg-stone-800 md:bg-opacity-50 flex justify-around items-center fixed left-0 bottom-0 w-full md:w-auto md:fixed md:left-0 md:top-0 md:flex-col md:p-2 md:h-screen gap-2">
+    <div className="p-2 z-50 bg-stone-800 md:bg-opacity-50 flex justify-around items-center fixed left-0 bottom-0 w-full md:w-auto md:fixed md:left-0 md:top-0 md:flex-col md:p-2 md:h-screen gap-2">
       <Logo />
       <NavBarLinks url="/" name="Home" />
       <NavBarLinks url="/moviesplp" name="Movies" />

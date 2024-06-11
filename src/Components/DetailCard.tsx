@@ -41,7 +41,7 @@ const DetailCard = ({ mainTerm, searchTerm, id }: PropsType) => {
     getMovie();
   }, [id, mainTerm, searchTerm]);
 
-  console.log(movie?.genres);
+  //console.log(movie?.genres);
   useEffect(() => {
     const logVisit = async () => {
       try {

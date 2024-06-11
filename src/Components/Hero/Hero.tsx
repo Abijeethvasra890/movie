@@ -40,7 +40,7 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
     const getData = async () => {
       try {
         const data = await fetchData({ mainTerm: main, searchTerm: search, thirdTerm: third });
-        console.log(data);
+        //console.log(data);
         if (pdp) setData([data]);
         else setData(data.results);
       } catch (error) {
@@ -111,7 +111,7 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
   const renderSkeletons = () => {
     return (
       <div className="flex flex-col h-96 justify-between">
-          <Skeleton height={300} width={1200} baseColor="#1f2937" highlightColor="#374151"/>
+          <Skeleton height={300} width={1100} baseColor="#1f2937" highlightColor="#374151"/>
       </div>
     );
   };
@@ -119,7 +119,7 @@ const Hero = ({ main, search, third, pdp }: PropsType) => {
 
   return (
     <div
-      className="flex max-w-screen rounded-xl md:h-[375px] md:max-w-[calc(100%-200px)] m-auto p-4 ml-3 relative shadow-red-800 shadow-2xl"
+      className="flex max-w-screen rounded-xl min-h-[500px] md:h-[375px] md:max-w-[calc(100%-200px)] m-auto p-4 ml-3 relative shadow-red-800 shadow-2xl"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
